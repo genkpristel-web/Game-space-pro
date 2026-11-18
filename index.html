@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080d1b">
+<title>Game Space Pro</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{color-scheme:dark;--bg:#080d1b;--panel:#121c32;--line:#263858;--cyan:#40eaff;--violet:#9b7cff;--muted:#9aacca}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 90% 0%,#28356c 0,transparent 34%),var(--bg);color:#f5f8ff;font-family:system-ui,Arial,sans-serif;padding-bottom:30px}
+header{max-width:760px;margin:auto;padding:22px 18px 14px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:22px;font-weight:900;letter-spacing:1px}.logo span{color:var(--cyan)}.status{font-size:11px;color:#b9c8e8;border:1px solid var(--line);background:#101a30;padding:8px 10px;border-radius:30px}
+main{max-width:760px;margin:auto;padding:0 15px}.hero{border:1px solid #46588d;border-radius:23px;padding:20px;background:linear-gradient(130deg,#1b3158,#38285e 65%,#17465a);position:relative;overflow:hidden}.hero:after{content:"✦";position:absolute;right:20px;top:5px;font-size:95px;color:#ffffff17}.tag{font-size:11px;letter-spacing:2px;color:#9af1ff;font-weight:800}.hero h1{font-size:27px;margin:8px 0}.hero p{font-size:13px;color:#c7d4f0;margin:0 0 15px}.btn{border:0;border-radius:12px;padding:11px 14px;font-weight:800;background:linear-gradient(90deg,var(--cyan),#9d8aff);color:#071020}
+.section{display:flex;justify-content:space-between;align-items:center;margin:23px 2px 11px}.section h2{font-size:17px;margin:0}.muted{font-size:11px;color:var(--muted)}
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.game{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);padding:12px;border-radius:16px;min-width:0}.gicon{width:47px;height:47px;flex-shrink:0;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#31548a,#63418e);font-size:25px}.game strong{display:block;font-size:13px;overflow-wrap:anywhere}.game small{font-size:10px;color:var(--muted)}.game button{margin-left:auto;background:#263b60;color:#bff6ff;border:0;border-radius:9px;padding:8px;font-size:10px;font-weight:800}
+.add{display:flex;gap:7px;margin-top:10px}.add input{width:100%;min-width:0;background:#101a30;border:1px solid var(--line);border-radius:11px;padding:12px;color:white}.add button{white-space:nowrap}
+.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.mode{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px;text-align:left;color:white}.mode .emoji{font-size:23px}.mode b{display:block;font-size:13px;margin:5px 0 2px}.mode small{color:var(--muted);font-size:10px}.mode.on{border-color:var(--cyan);background:linear-gradient(140deg,#12334a,#24264d);box-shadow:0 0 16px #40eaff20}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 8px;text-align:center}.stat .big{font-size:20px;font-weight:850}.stat small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.timer{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px;display:flex;justify-content:space-between;align-items:center;gap:10px}.time{font-size:25px;font-weight:850;font-variant-numeric:tabular-nums}.timer button{border:0;border-radius:10px;padding:10px 12px;font-weight:800;background:#293c60;color:#d4faff}
+.install{width:100%;margin-top:12px;background:linear-gradient(90deg,#32dff3,#8b82ff);border:0;border-radius:14px;padding:14px;font-weight:900;color:#071020}
+.notice{font-size:10px;line-height:1.5;color:#8596b8;margin:17px 3px}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#263b60;border:1px solid #5675a8;padding:10px 15px;border-radius:30px;font-size:12px;display:none;z-index:5}
+@media(max-width:390px){.games{grid-template-columns:1fr}.hero h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header><div class="logo">GAME <span>SPACE PRO</span></div><div class="status">🚀 GAMING HUB</div></header>
+<main>
+<section class="hero"><div class="tag">WELCOME PLAYER</div><h1>Masuk ke arena game</h1><p>Semua game dan alat gaming dalam satu tempat.</p><button class="btn" onclick="document.getElementById('gameTitle').scrollIntoView({behavior:'smooth'})">BUKA GAME ↓</button></section>
+<div class="section" id="gameTitle"><h2>🎮 Game Saya</h2><span class="muted" id="count">2 game</span></div>
+<div class="games" id="games">
+<div class="game"><div class="gicon">🟥</div><div><strong>Roblox</strong><small>Game favorit</small></div><button onclick="openGame('https://www.roblox.com')">BUKA</button></div>
+<div class="game"><div class="gicon">⛏️</div><div><strong>Minecraft</strong><small>Game favorit</small></div><button onclick="openGame('https://www.minecraft.net')">BUKA</button></div>
+</div>
+<div class="add"><input id="gameName" maxlength="25" placeholder="Nama game baru"><button class="btn" onclick="addGame()">＋ Tambah</button></div>
+<div class="section"><h2>⚡ Mode Gaming</h2><span class="muted">Ketuk untuk aktifkan</span></div>
+<div class="modes">
+<button class="mode" onclick="toggleMode(this,'Mode Fokus aktif')"><span class="emoji">🎯</span><b>Mode Fokus</b><small>Kurangi gangguan saat bermain</small></button>
+<button class="mode" onclick="toggleMode(this,'Mode Hemat Tampilan aktif')"><span class="emoji">🌙</span><b>Mode Malam</b><small>Tampilan gelap gaming</small></button>
+<button class="mode" onclick="toggleMode(this,'Mode Performa tampilan aktif')"><span class="emoji">⚡</span><b>Mode Performa</b><small>Animasi antarmuka lebih ringan</small></button>
+<button class="mode" onclick="toggleMode(this,'Panel Gaming aktif')"><span class="emoji">🕹️</span><b>Panel Gaming</b><small>Kontrol cepat di halaman ini</small></button>
+<button class="mode" onclick="toggleMode(this,'Mode Jangan Ganggu tampilan aktif')"><span class="emoji">🔕</span><b>Jangan Ganggu</b><small>Pengingat untuk senyapkan notifikasi</small></button>
+<button class="mode" onclick="toggleMode(this,'Kunci sentuhan simulasi aktif')"><span class="emoji">🔒</span><b>Kunci Sentuhan</b><small>Simulasi tombol kunci di web</small></button>
+</div>
+<div class="section"><h2>📊 Status Perangkat</h2><span class="muted">Info browser</span></div>
+<div class="stats">
+<div class="stat"><div class="big" id="battery">--</div><small>🔋 Baterai</small></div>
+<div class="stat"><div class="big" id="network">--</div><small>📶 Jaringan</small></div>
+<div class="stat"><div class="big" id="screen">--</div><small>📱 Layar</small></div>
+</div>
+<div class="section"><h2>⏱️ Timer Bermain</h2><span class="muted">Waktu sesi</span></div>
+<div class="timer"><div><div class="time" id="clock">00:00:00</div><small class="muted">Durasi sejak mulai</small></div><div><button onclick="startTimer()">MULAI</button> <button onclick="resetTimer()">RESET</button></div></div>
+<button class="install" id="installBtn" onclick="installApp()">＋ PASANG KE LAYAR UTAMA</button>
+<p class="notice">Info penting: mode di halaman ini adalah kontrol tampilan web, bukan pengaturan sistem Android. Pemasangan ke layar utama tersedia jika browser mendukung PWA. Untuk memasang, file ini perlu di-host di HTTPS atau dibuka dari server lokal. Fitur panel mengambang di atas Roblox/aplikasi lain membutuhkan APK Android asli dan izin khusus.</p>
+</main><div class="toast" id="toast"></div>
+<script>
+let deferredPrompt=null,seconds=0,timer=null;
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',2300)}
+function openGame(url){window.open(url,'_blank')}
+function toggleMode(el,msg){el.classList.toggle('on');toast(msg)}
+function addGame(){let inp=document.getElementById('gameName'),name=inp.value.trim();if(!name)return toast('Masukkan nama game dulu');let card=document.createElement('div');card.className='game';let ico=document.createElement('div');ico.className='gicon';ico.textContent='🎮';let info=document.createElement('div'),b=document.createElement('strong'),s=document.createElement('small');b.textContent=name;s.textContent='Game ditambahkan';info.append(b,s);let del=document.createElement('button');del.textContent='HAPUS';del.onclick=()=>{card.remove();updateCount()};card.append(ico,info,del);document.getElementById('games').append(card);inp.value='';updateCount();toast('Game ditambahkan')}
+function updateCount(){document.getElementById('count').textContent=document.querySelectorAll('.game').length+' game'}
+function drawClock(){let h=String(Math.floor(seconds/3600)).padStart(2,'0'),m=String(Math.floor(seconds%3600/60)).padStart(2,'0'),s=String(seconds%60).padStart(2,'0');document.getElementById('clock').textContent=`${h}:${m}:${s}`}
+function startTimer(){if(timer)return;timer=setInterval(()=>{seconds++;drawClock()},1000);toast('Timer dimulai')}
+function resetTimer(){clearInterval(timer);timer=null;seconds=0;drawClock();toast('Timer direset')}
+function updateInfo(){document.getElementById('screen').textContent=screen.width+'px';document.getElementById('network').textContent=navigator.onLine?'Online':'Offline'}
+if(navigator.getBattery){navigator.getBattery().then(b=>{function upd(){document.getElementById('battery').textContent=Math.round(b.level*100)+'%'}upd();b.addEventListener('levelchange',upd)}).catch(()=>{})}
+updateInfo();window.addEventListener('resize',updateInfo);window.addEventListener('online',updateInfo);window.addEventListener('offline',updateInfo);
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBtn').textContent='＋ PASANG KE LAYAR UTAMA'});
+async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null}else{toast('Gunakan menu Chrome ⋮ lalu pilih Tambahkan ke layar utama')}}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
+</script>
+</body></html>
